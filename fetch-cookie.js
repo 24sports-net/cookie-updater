@@ -13,7 +13,12 @@ axios.get(url)
     }
 
     const item = data[0];
-    const cookie = item.cookie;
+    let cookie = item.cookie;
+
+    // Remove existing "__hdnea__=" if present
+    if (cookie.startsWith('__hdnea__=')) {
+      cookie = cookie.replace('__hdnea__=', '');
+    }
 
     const formatted = {
       cookieHeader: `__hdnea__=${cookie}`
